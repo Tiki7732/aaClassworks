@@ -22,11 +22,11 @@ class Queue
     end
 end
 
-quimb = Queue.new
-quimb.enqueue("Banana")
-quimb.enqueue("claire")
-quimb.enqueue("dog")
-p quimb
-quimb.dequeue
-p quimb
-p quimb.peek
+# quimb = Queue.new
+# quimb.enqueue("Banana")
+# quimb.enqueue("claire")
+# quimb.enqueue("dog")
+# p quimb
+# quimb.dequeue
+# p quimb
+# p quimb.peek
