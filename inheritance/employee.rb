@@ -22,25 +22,26 @@ class Manager < Employee
         @employees = employees
     end
 
-    def bonus(multiplier)
+    def bonus(multiplier)                
+        return self.get_subordinates_pay * multiplier
+    end
+
+    def get_subordinates_pay
         amount = 0
-        employees.each do |employee| 
-            amount += employee.salary 
-            if employee.is_a?(Manager)
-                employee.employees.each {|subordiantes| amount += subordiantes.salary}
-            end
+        self.employees.each do |employee| 
+            amount += employee.salary
+            amount += employee.get_subordinates_pay if employee.is_a?(Manager)
         end
-        return amount * multiplier
+        amount
     end
 end
 
-ed = Employee.new("Ed", "SalesRep", 50000, "Tom")
-p ed.boss
-p ed.bonus(2)
-jane = Employee.new("Jane", "SalesRep", 50000, "Tom")
-tom = Manager.new("Tom", "SalesManager", 75000, "Kathy", [ed, jane])
-p tom.boss
-p tom.employees
-p tom.bonus(2)
-kathy = Manager.new("Kathy", "Founder", 100000, nil, [tom])
-p kathy.bonus(2)
+ed = Employee.new("Ed", "SalesRep", 10000, "Tom")
+
+p ed.bonus(3)
+jane = Employee.new("Jane", "SalesRep", 12000, "Tom")
+tom = Manager.new("Tom", "SalesManager", 78000, "Kathy", [ed, jane])
+
+p tom.bonus(4)
+kathy = Manager.new("Kathy", "Founder", 1000000, nil, [tom])
+p kathy.bonus(5)
