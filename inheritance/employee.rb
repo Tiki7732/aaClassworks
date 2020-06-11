@@ -42,3 +42,5 @@ tom = Manager.new("Tom", "SalesManager", 75000, "Kathy", [ed, jane])
 p tom.boss
 p tom.employees
 p tom.bonus(2)
+kathy = Manager.new("Kathy", "Founder", 100000, nil, [tom])
+p kathy.bonus(2)
