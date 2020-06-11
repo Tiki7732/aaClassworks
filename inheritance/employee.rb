@@ -22,11 +22,23 @@ class Manager < Employee
         @employees = employees
     end
 
+    def bonus(multiplier)
+        amount = 0
+        employees.each do |employee| 
+            amount += employee.salary 
+            if employee.is_a?(Manager)
+                employee.employees.each {|subordiantes| amount += subordiantes.salary}
+            end
+        end
+        return amount * multiplier
+    end
 end
 
 ed = Employee.new("Ed", "SalesRep", 50000, "Tom")
 p ed.boss
 p ed.bonus(2)
-tom = Manager.new("Tom", "SalesManager", 75000, "Kathy", [ed])
+jane = Employee.new("Jane", "SalesRep", 50000, "Tom")
+tom = Manager.new("Tom", "SalesManager", 75000, "Kathy", [ed, jane])
 p tom.boss
 p tom.employees
+p tom.bonus(2)
